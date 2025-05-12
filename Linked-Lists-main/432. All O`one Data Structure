@@ -1,0 +1,57 @@
+class AllOne(object):
+
+    def __init__(self):
+        self.dict = {}
+
+    def inc(self, key):
+        """
+        :type key: str
+        :rtype: None
+        """
+        if key in self.dict:
+            self.dict[key] += 1
+        else:
+            self.dict[key] = 1
+
+    def dec(self, key):
+        """
+        :type key: str
+        :rtype: None
+        """
+        if key in self.dict:
+            if self.dict[key] == 1:
+                del self.dict[key]
+            else:
+                self.dict[key] -= 1
+
+    def getMaxKey(self):
+        """
+        :rtype: str
+        """
+        maxVal = 0
+        maxKey = ''
+        for key, val in self.dict.items():
+            if val > maxVal:
+                maxVal = val
+                maxKey = key
+        return maxKey
+
+    def getMinKey(self):
+        """
+        :rtype: str
+        """
+        minVal = float('inf')
+        minKey = ''
+        for key, val in self.dict.items():
+            if val < minVal:
+                minVal = val
+                minKey = key
+        return minKey
+
+
+# Your AllOne object will be instantiated and called as such:
+# obj = AllOne()
+# obj.inc(key)
+# obj.dec(key)
+# param_3 = obj.getMaxKey()
+# param_4 = obj.getMinKey()

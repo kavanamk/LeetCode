@@ -1,0 +1,59 @@
+class Node(object):
+    def __init__(self, val=0, left=None, right=None, next=None):
+        self.val = val
+        self.left = left
+        self.right = right
+        
+from collections import deque
+
+class Solution(object):
+    def zigzagLevelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        if not root:
+            return
+        
+        # Initialize a queue for BFS
+        queue = deque([root])
+        ans=[]
+        i=0
+        
+        # Loop until the queue is empty
+        while queue:
+            # Get the current level size
+            level_size = len(queue)
+            temp_list = []  # Temporary list to store nodes at this level
+            i+=1
+            
+            # Process all nodes at the current level
+            for _ in range(level_size):
+                # Dequeue the front node
+                current_node = queue.popleft()
+                
+                # Add the value of the current node to the temp list
+                temp_list.append(current_node.val)
+                
+                # Enqueue the left and right children if they exist
+                if current_node.left:
+                    queue.append(current_node.left)
+                if current_node.right:
+                    queue.append(current_node.right)
+            
+            # Print the nodes at the current level
+            if i%2==0:
+                temp_list.reverse()
+            ans.append(temp_list)
+        return ans
+        
+  
+        
+root=Node(1)
+root.left=Node(2)
+root.right=Node(3)
+root.left.right=Node(5)
+root.right.right=Node(4)
+obj=Solution()
+ans=obj.zigzagLevelOrder(root)
+print(ans)

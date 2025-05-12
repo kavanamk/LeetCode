@@ -1,0 +1,89 @@
+class TextEditor(object):
+
+    def __init__(self):
+        self.text='|'
+        self.pos=0
+        
+
+    def addText(self, text):
+        """
+        :type text: str
+        :rtype: None
+        """
+        self.text=self.text[:len(self.text)-1]
+        self.text+=text
+        self.text+='|'
+        self.pos=self.text.index('|')
+        print(self.text)
+        
+
+    def deleteText(self, k):
+        """
+        :type k: int
+        :rtype: int
+        """
+        n=len(self.text)
+        substr1_end=self.pos-k
+        substr2_beg=self.pos
+        del_text_len=len(self.text[substr1_end:substr2_beg])
+        self.text = self.text[0:substr1_end]+self.text[substr2_beg:n]
+        #print(self.text)
+        return del_text_len
+    
+    def insertCursor(self,string, index):
+        return string[:index] + '|' + string[index:]
+
+
+    def cursorLeft(self, k):
+        """
+        :type k: int
+        :rtype: str
+        
+        """
+        output=''
+        #import pdb
+        #pdb.set_trace()
+        str_list = self.text.split('|')
+        for ss in str_list:
+            output+=ss
+        if self.pos-k<=0:
+            pos=0
+        else:
+            pos=self.pos-k
+        self.text=self.insertCursor(output, pos)
+        self.pos=self.text.index('|')
+        return self.text
+        
+        
+        
+
+    def cursorRight(self, k):
+        """
+        :type k: int
+        :rtype: str
+        """
+        k=k+1
+        n=len(self.text)
+        output=''
+        #import pdb
+        #pdb.set_trace()
+        str_list = self.text.split('|')
+        for ss in str_list:
+            output+=ss
+        if self.pos+k>=n:
+            pos=n
+        else:
+            pos=self.pos+k
+        self.text=self.insertCursor(output, pos)
+        self.pos=self.text.index('|')
+        return self.text
+        
+
+
+# Your TextEditor object will be instantiated and called as such:
+obj = TextEditor()
+obj.addText("leetcode")
+param_3 = obj.cursorLeft(5)
+print(param_3)
+param_4 = obj.cursorRight(3)
+print(param_4)

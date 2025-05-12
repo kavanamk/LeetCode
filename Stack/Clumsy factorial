@@ -1,0 +1,33 @@
+class Solution(object):
+    def clumsy(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        operation='mul'
+        res=n
+        for i in range(n-1,0,-1):
+            print(i, res , operation)
+            if operation=='mul':
+                res*=i
+                operation='div'
+               
+            elif operation=='div':
+                res=res//i
+                operation='add'
+             
+            elif operation=='add':
+                res+=i
+                operation='sub'
+                
+            else:
+                res-=i
+                operation='mul'
+            print(res)
+        
+        return res
+            
+
+
+obj=Solution()
+print(obj.clumsy(4))

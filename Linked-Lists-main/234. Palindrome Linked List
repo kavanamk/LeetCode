@@ -1,0 +1,58 @@
+class ListNode(object):
+    def __init__(self, val=0, next=None):
+         self.val = val
+         self.next = next
+         
+         
+class Solution(object):
+    
+    def reverseLL(self,node):
+        prev=None
+        curr=node
+        
+        while curr is not None:
+            next_node=curr.next
+            curr.next=prev
+            prev=curr
+            curr=next_node
+        return prev
+        
+    def isPalindrome(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        slow_pointer = head
+        fast_pointer = head
+        while fast_pointer and fast_pointer.next:
+            slow_pointer = slow_pointer.next
+            fast_pointer = fast_pointer.next.next
+        
+        
+        slow_pointer=self.reverseLL(slow_pointer)
+        
+        while slow_pointer is not None:
+            if head.val==slow_pointer.val:
+                head=head.next
+                slow_pointer=slow_pointer.next
+            else:
+                return False
+        return True
+
+
+head=ListNode(1)
+first=ListNode(2)
+sec=ListNode(3)
+thr=ListNode(1)
+
+head.next=first
+first.next=sec
+sec.next=thr
+
+onj=Solution()
+print(onj.isPalindrome(head))
+
+while(head is not None):
+    print(head.val)
+    head=head.next
+    

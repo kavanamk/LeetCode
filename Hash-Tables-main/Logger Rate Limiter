@@ -1,0 +1,21 @@
+class RequestLogger:
+    def __init__(self, time_limit):
+        # Initialize with the time limit and a hashmap to store requests and their timestamps
+        self.time_limit = time_limit
+        self.hashmap = {}
+
+    def message_request_decision(self, timestamp, request):
+        # Check if the request exists in the hashmap
+        if request in self.hashmap:
+            # Calculate the time difference
+            if timestamp - self.hashmap[request] < self.time_limit:
+                # If the time difference is less than the limit, reject the request
+                return False
+            else:
+                # Otherwise, update the timestamp and accept the request
+                self.hashmap[request] = timestamp
+                return True
+        else:
+            # If the request is new, store its timestamp and accept the request
+            self.hashmap[request] = timestamp
+            return True

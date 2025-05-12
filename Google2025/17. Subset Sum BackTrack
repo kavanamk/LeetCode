@@ -1,0 +1,22 @@
+def subset_sum(X, T):
+    # Base cases:
+    if T == 0:
+        return True  # We found a subset that sums to T
+    if T < 0 or not X:
+        return False  # Either T is negative or X is empty
+
+    # Choose the first element in X
+    x = X[0]
+    remaining_X = X[1:]
+
+    # Recursive cases:
+    # 1. Check if we can find a subset including x that sums to T
+    # 2. Check if we can find a subset excluding x that sums to T
+    return subset_sum(remaining_X, T - x) or subset_sum(remaining_X, T)
+
+# Example usage:
+X = [3, 34, 4, 12, 5, 2]
+T = 9
+
+print(subset_sum(X, T))
+  

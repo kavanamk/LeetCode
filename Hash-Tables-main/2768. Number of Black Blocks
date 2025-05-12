@@ -1,0 +1,21 @@
+class Solution(object):
+    
+    def countBlackBlocks(self, m, n, coordinates):
+        """
+        :type m: int
+        :type n: int
+        :type coordinates: List[List[int]]
+        :rtype: List[int]
+        """
+        matrix = [[0] * n for _ in range(m)]  # Initialize matrix with zeros
+        
+        for x, y in coordinates:
+            matrix[x][y] = 1  # Set black cell to 1
+
+        d = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0}
+        for i in range(m - 1):
+            for j in range(n - 1):
+                count = matrix[i][j] + matrix[i][j + 1] + matrix[i + 1][j] + matrix[i + 1][j + 1]
+                d[count] += 1
+
+        return list(d.values())

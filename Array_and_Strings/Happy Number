@@ -1,0 +1,26 @@
+"""A happy number is a number defined by the following process:
+
+Starting with any positive integer, replace the number by the sum of the squares of its digits.
+Repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.
+Those numbers for which this process ends in 1 are happy."""
+
+def sum_of_squares(n):
+        return str(sum(int(c) ** 2 for c in str(n)))
+    
+class Solution(object):
+    def isHappy(self, n):
+        hashmap=list()
+        str_n=str(n)
+        while(len(hashmap)==len(set(hashmap))):
+            str_n=sum_of_squares(str_n)
+            if str_n not in hashmap:
+                hashmap.append(str_n)
+            else:
+                break
+            if '1' in hashmap:
+                n=1
+                break
+        if n == 1:
+            return True
+        else:
+            return False

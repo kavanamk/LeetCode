@@ -1,0 +1,86 @@
+#brute force
+s = "3[a]2[bc]"
+while('[' in s):
+    openbrac_pos=s.rindex('[')
+    ss=s[openbrac_pos:]
+    closebrac_pos=len(s[:openbrac_pos])+ss.index(']')
+    char=s[openbrac_pos+1:closebrac_pos]
+    multiple=s[openbrac_pos-1]
+    appendix=int(multiple)*char
+    s=s[:openbrac_pos-1]+appendix+s[closebrac_pos+1:]
+    print(s)
+
+#using stack/recursion
+
+from collections import deque
+
+def lastocc(l):
+    ind=0
+    for x in reversed(l):
+        ind+=1
+        if x=='[':
+            return len(l)-ind
+        
+def retN(s):
+
+    si_num='0'
+    cutindex=0
+    for j in reversed(s):
+        if(j.isnumeric()):
+            cutindex+=1
+        else:
+            break
+    s=s[-cutindex:]
+    sz=''
+    i=0
+    for x in s:
+        sz+=x
+    print(sz)
+    xn=int(sz)
+    return xn,len(sz)
+
+class Solution(object):
+    def decodeString(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """    
+    
+    
+        stack=deque()
+        for x in reversed(s):
+            stack.append(x)
+            
+        
+        
+        ans=deque()
+        temp=deque()
+        
+        ss=''
+        sf=[]
+        n=1
+        while len(stack)!=0:
+            e=stack.pop()
+            
+            if e==']':
+                openbrac_pos=lastocc(sf)
+                char=sf[openbrac_pos+1:]
+                xn,lenxn=retN(sf[:openbrac_pos])
+                ss=int(xn)*char
+                sf=sf[:openbrac_pos-lenxn]+ss
+            elif e=='[':
+                sf.append(e)
+            elif e.isnumeric():
+                sf.append(e)
+                n=int(e)
+            else:
+                sf.append(e)
+                
+              
+        sx=''
+        i=0
+        for x in sf:
+            sx+=x
+        
+        return sx
+        

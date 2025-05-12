@@ -1,0 +1,30 @@
+class StackArray:
+    
+    stack = []
+    max=0
+    
+    def isEmpty(self):
+        if len(self.stack)==0:
+            return True
+        return False
+        
+    def push(self,val):
+        if val>self.max:
+            self.max=val
+        self.stack.append(val)
+    
+    def getMax(self):
+        return self.max
+    
+    def printStack(self):
+        print(self.stack)
+
+
+obj=StackArray()
+obj.push(1)
+obj.push(10)
+obj.push(3)
+obj.printStack()
+print(obj.getMax())
+    
+    

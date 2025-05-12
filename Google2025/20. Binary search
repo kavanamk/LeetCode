@@ -1,0 +1,28 @@
+class Solution(object):
+    def search(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        n = len(nums)
+        
+        # Base case: if the array is empty, return -1
+        if n == 0:
+            return -1
+        
+        mid = n // 2
+
+        # If the middle element is the target, return the index
+        if nums[mid] == target:
+            return mid
+        
+        # If the target is less than the middle element, search in the left half
+        elif nums[mid] > target:
+            return self.search(nums[:mid], target)
+        
+        # If the target is greater than the middle element, search in the right half
+        else:
+            result = self.search(nums[mid+1:], target)
+            # If the target was found in the right half, adjust the index accordingly
+            return (mid + 1 + result) if result != -1 else -1

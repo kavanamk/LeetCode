@@ -1,0 +1,22 @@
+class myHashMap(object):
+    
+    def __init__(self):
+        pass
+    
+    def put(self,key,val):
+        self.key=key
+        self.val=val
+    
+    def get(self,key):
+        while head.next!=null:
+            if head.key==key:
+                return head.val
+        return head
+    
+        
+
+    
+hpo=myHashMap()
+hpo.put(1,1)
+hpo.put(1,9)
+

@@ -1,0 +1,10 @@
+
+  // EXERCISE 6: write a function "sum" that takes a list of integers and
+  // sums them.
+  //
+  // As with all of the exercises in this assignment, your function MUST be
+  // recursive and MUST NOT use a while loop.
+  def sum(xs: List[Int]): Int = {
+    if (xs.isEmpty) then 0            
+    else xs.head + sum(xs.tail)    
+}

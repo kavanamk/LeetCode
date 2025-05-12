@@ -1,0 +1,31 @@
+def fraction_to_decimal(numerator, denominator):
+    result, remainder_map = "", {}
+    # if the numerator is 0, then return 0 in the string
+    if numerator == 0:
+        return '0'
+
+    # If the numerator or denominator is negative, then append "-" to the result
+    if (numerator < 0) ^ (denominator < 0):
+        result += '-'
+
+        # Make the numerator and denominator positive after adding "-" to the result
+        numerator = abs(numerator)
+        denominator = abs(denominator)
+
+    # Calculate the quotient
+    quotient = numerator / denominator
+    print("\n\tquotient:", int(quotient))
+    # Calculate the remainder
+    remainder = (numerator % denominator) * 10
+    print("\tremainder:", int(remainder))
+    # Append the quotient part in the result
+    result += str(int(quotient))
+    print("\tresult:", result)
+    # if the remainder is 0, then return the result
+    if remainder == 0:
+        return result
+    else:
+        print("\tAs remainder is not zero. Append . to the result.")
+        # Append . before the right part
+        result += "."
+        print("\tNow result is:", result)

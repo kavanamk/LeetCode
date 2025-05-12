@@ -1,0 +1,45 @@
+class Solution(object):
+    def evalRPN(self, tokens):
+        """
+        :type tokens: List[str]
+        :rtype: int
+        """
+        numStack=[]
+        res=0
+        for token in tokens:
+            if token=="+":
+                n1=numStack.pop()
+                n2=numStack.pop()
+                res=n1+n2
+                numStack.append(res)
+            elif token=="-":
+                n1=numStack.pop()
+                n2=numStack.pop()
+                res=n2-n1
+                numStack.append(res)
+            elif token=="*":
+                n1=numStack.pop()
+                n2=numStack.pop()
+                res=n1*n2
+                numStack.append(res)
+            elif token=="/":
+                n1=numStack.pop()
+                n2=numStack.pop()
+                if n2!=0:
+                    res=n2/n1
+                else:
+                    return None
+                numStack.append(int(res))
+            else:
+                numStack.append(int(token))
+        
+        return numStack.pop()
+            
+
+
+
+
+
+tokens =  ["10","6","9","3","+","-11","*","/","*","17","+","5","+"]
+sol = Solution()
+print(sol.evalRPN(tokens))  # Expected Output: /home/user/Pictures

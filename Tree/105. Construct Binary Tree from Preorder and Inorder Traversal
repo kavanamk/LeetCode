@@ -1,0 +1,57 @@
+# Definition for a binary tree node.
+class TreeNode(object):
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+        
+
+class Solution(object):
+    def buildTree(self, preorder, inorder):
+        """
+        :type preorder: List[int]
+        :type inorder: List[int]
+        :rtype: TreeNode
+        """
+        
+        if not preorder or not inorder:
+            return None
+        
+        rootVal=preorder.pop(0)
+        root = TreeNode(rootVal)
+        inIndex=inorder.index(rootVal)
+        
+        root.left=self.buildTree(preorder, inorder[0:inIndex])
+        root.right=self.buildTree(preorder, inorder[inIndex+1:])
+        
+        return root
+        
+        
+preorder = [3,9,20,15,7]
+inorder = [9,3,15,20,7]
+
+obj=Solution()
+ans=obj.buildTree(preorder,inorder)
+
+
+
+def inorder_traversal(root):
+    if root:
+        inorder_traversal(root.left)
+        print(root.val, end=' ')
+        inorder_traversal(root.right)
+
+def preorder_traversal(root):
+    if root:
+        print(root.val, end=' ')
+        preorder_traversal(root.left)
+        preorder_traversal(root.right)
+        
+def postorder_traversal(root):
+    if root:
+        postorder_traversal(root.left)
+        postorder_traversal(root.right)
+        print(root.val, end=' ')
+
+#print("Pre\n")
+preorder_traversal(ans)

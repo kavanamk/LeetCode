@@ -1,0 +1,45 @@
+class ListNode(object):
+    def __init__(self, val=0, next=None):
+         self.val = val
+         self.next = next
+         
+         
+class Solution(object):
+    def getIntersectionNode(self, headA, headB):
+        """
+        :type head1, head1: ListNode
+        :rtype: ListNode
+        """
+        listA=[]
+        listB=[]
+        while headA is not None:
+            listA.append(headA.val)
+            headA=headA.next
+        print(listA)
+        while headB is not None:
+            print(headB.val)
+            if headB.val in listA:
+                return headB
+            headB=headB.next
+        return None
+        
+
+
+headA=ListNode(1)
+first=ListNode(9)
+sec=ListNode(1)
+thr=ListNode(2)
+fourth=ListNode(4)
+headB=ListNode(3)
+
+headA.next=first
+first.next=sec
+sec.next=thr
+thr.next=fourth
+headB.next=thr
+
+onj=Solution()
+head=onj.getIntersectionNode(headA, headB)
+
+print(head.val)
+    

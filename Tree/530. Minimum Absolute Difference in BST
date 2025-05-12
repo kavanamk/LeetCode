@@ -1,0 +1,40 @@
+import heapq
+
+class Node(object):
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution(object):
+    
+    def __init__(self):
+        self.heap=[]
+        
+    def create_heap(self,root):
+        if root:
+            self.create_heap(root.left)
+            heapq.heappush(self.heap, root.val)
+            self.create_heap(root.right)
+            
+            
+    def getMinimumDifference(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        self.create_heap(root)
+        min1=heapq.heappop(self.heap)
+        min2=heapq.heappop(self.heap)
+        
+        return abs(min1-min2)
+        
+        
+
+# Example usage
+root = Node(3)
+root.left = Node(9)
+root.right = Node(20)
+root.left.left = Node(4)
+root.right.left = Node(15)
+root.right.right = Node(7)

@@ -1,0 +1,59 @@
+import math
+class ListNode(object):
+    def __init__(self, val=0, next=None):
+         self.val = val
+         self.next = next
+         
+         
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution:
+    def mergeNodes(self, head):
+        dummy = ListNode(0)
+        current = dummy
+        nodeVal = 0
+        head=head.next
+
+        while head:
+            if head.val == 0:
+                current.next = ListNode(nodeVal)
+                nodeVal = 0
+                head = head.next
+                current = current.next
+                while head and head.val == 0:
+                    head = head.next
+            else:
+                nodeVal += head.val
+                head = head.next
+
+        return dummy.next
+
+
+head=ListNode(0)
+first=ListNode(3)
+sec=ListNode(1)
+thr=ListNode(0)
+four=ListNode(4)
+five=ListNode(7)
+six=ListNode(0)
+
+head.next=first
+first.next=sec
+sec.next=thr
+thr.next=four
+four.next=five
+five.next=six
+
+onj=Solution()
+
+head2=onj.mergeNodes(head)
+
+while(head2 is not None):
+    print(head2.val)
+    head2=head2.next
+
+
+    

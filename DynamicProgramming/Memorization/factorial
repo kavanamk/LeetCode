@@ -1,0 +1,31 @@
+#recursion factorial
+
+def fact(n):
+    if n==0:
+        return 1
+    return n*fact(n-1)
+
+print(fact(5))
+
+#memorization Top Down
+
+def fact_topdown(n,memo):
+    
+    
+    if n==0:
+        return 1
+    if memo[n]!=-1:
+        return memo[n]
+    else:
+        memo[n]=n*fact_topdown(n-1, memo)
+        return memo[n]
+
+
+memo={}
+memo[0]=0
+memo[1]=1
+n=5
+for i in range(2,n+1):
+    memo[i]=-1
+print(fact_topdown(n,memo))
+

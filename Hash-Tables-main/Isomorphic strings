@@ -1,0 +1,44 @@
+def is_isomorphic(string1, string2):
+  
+  map1={}
+  for s1,s2 in zip(string1,string2):
+    if s1 not in map1:
+      map1[s1]=s2
+    elif map1[s1]!=s2:
+      return False
+  
+    map2={}
+    for s1,s2 in zip(string1,string2):
+      if s2 not in map2:
+        map2[s2]=s1
+      elif map2[s2]!=s1:
+        return False
+    
+  return True
+
+#better time complexity
+
+def is_isomorphic(string1, string2):
+
+    map_str1_str2 = {}
+    map_str2_str1 = {}
+
+    for i in range(len(string1)):
+        char1 = string1[i]
+        char2 = string2[i]
+
+        if char1 in map_str1_str2 and map_str1_str2[char1] != char2:
+            return False
+
+        if char2 in map_str2_str1 and map_str2_str1[char2] != char1:
+            return False
+
+        map_str1_str2[char1] = char2
+        map_str2_str1[char2] = char1
+
+    return True
+
+
+string1="badc"
+string2= "baba"
+print(is_isomorphic(string1, string2))

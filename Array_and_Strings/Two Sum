@@ -1,0 +1,22 @@
+def find_sum_of_two(nums, target):
+   
+    # Replace this placeholder return statement with your code
+    #sort array
+    nums.sort
+    
+    #itterate throught the 
+    p1=0
+    p2=len(nums)-1
+    
+    while p1<p2:
+        if nums[p1]+nums[p2]==target:
+            return True
+        elif nums[p1]+nums[p2]<target:
+            p1+=1
+        else:
+            p2-=1
+    return False
+      
+nums=[1,2,3,4,7,8]
+target=16
+print(find_sum_of_two(nums, target))

@@ -1,0 +1,53 @@
+class TreeNode:
+    def __init__(self,val,left=None,right=None):
+        self.val=val
+        self.left=None
+        self.right=None
+        
+p=TreeNode(1)
+p.left=TreeNode(2)
+p.right=TreeNode(3)
+p.left.left=TreeNode(4)
+
+q=TreeNode(1)
+q.left=TreeNode(2)
+q.right=TreeNode(3)
+
+def height(node):
+    if node is None:
+        return 0
+    else:
+        left_height=height(node.left)
+        right_height=height(node.right)
+        return max(left_height,right_height)+1
+    
+def bfs(root):
+    ans=[]
+    h=height(root)
+    for i in range(1,h+1):
+        nodes=[]
+        nodesatcurrlevel=printcurrlevel(root,i,nodes)
+        for node in nodesatcurrlevel:
+            ans.append(node)
+        
+    return ans
+        
+        
+def printcurrlevel(root,level,nodes):
+    
+    if root is None:
+        return
+    if(level==1):
+        nodes.append(root.val)
+    elif level>1:
+        printcurrlevel(root.left,level-1,nodes)
+        printcurrlevel(root.right,level-1,nodes)
+    return nodes
+        
+
+def isSameTree(p,q):
+    #basically do bfs
+    return bfs(p)==bfs(q)
+
+#print(height(p))
+print(isSameTree(p,q))

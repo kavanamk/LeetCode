@@ -1,0 +1,11 @@
+s = "leEeetcode"
+n=len(s)
+result=[]
+for x in s:
+    
+    if x.isupper():
+        result.pop()
+    else:
+        result.append(x)
+
+print(result)

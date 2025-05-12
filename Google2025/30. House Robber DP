@@ -1,0 +1,35 @@
+class Solution(object):
+    def rob(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        # Edge case: If there are no houses, return 0
+        if not nums:
+            return 0
+        # Edge case: If there's only one house, rob it
+        if len(nums) == 1:
+            return nums[0]
+        
+        # Initialize two variables to store max amount up to previous two houses
+        prev1 = 0  # Max money robbed till the previous house
+        prev2 = 0  # Max money robbed till the house before the previous one
+        
+        # Iterate over each house
+        for num in nums:
+            # Choose the maximum of either:
+            # - Robbing the current house + max from two houses before
+            # - Skipping the current house and keeping the max from the previous house
+            temp = max(prev1, prev2 + num)
+            prev2 = prev1  # Move the previous max to the current
+            prev1 = temp   # Update the max to the new current max
+        
+        return prev1
+
+# Example usage:
+nums1 = [1, 2, 3, 1]
+nums2 = [2, 7, 9, 3, 1]
+
+solution = Solution()
+print(solution.rob(nums1))  # Output: 4
+print(solution.rob(nums2))  # Output: 12

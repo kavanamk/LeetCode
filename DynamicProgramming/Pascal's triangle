@@ -1,0 +1,25 @@
+class Solution(object):
+    def generate(self, numRows):
+        """
+        :type numRows: int
+        :rtype: List[List[int]]
+        """
+        if numRows<=0:
+            return []
+        if numRows==1:
+            return [[1]]
+        output = [[1],[1,1]]
+        for i in range(2,numRows):
+            row=[]
+            for j in range(len(output[i-1])-1):
+                row.append(output[i-1][j]+output[i-1][j+1])
+            row.append(1)
+            row=[1]+row
+            output.append(row)
+        
+        return output
+
+
+
+obj=Solution()
+print(obj.generate(0))

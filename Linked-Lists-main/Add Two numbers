@@ -1,0 +1,84 @@
+# Definition for singly-linked list.
+class ListNode(object):
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+        
+l1=ListNode(3,None)
+l12=ListNode(4,None)
+l13=ListNode(2,None)
+l1.next=l12
+l12.next=l13
+node=l1
+
+
+
+l2=ListNode(5,None)
+l22=ListNode(6,None)
+l23=ListNode(4,None)
+l2.next=l22
+l22.next=l23
+node=l2
+
+    
+class Solution(object):
+    def addTwoNumbers(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        ansbeg=ListNode(0,None)
+        ans=ListNode(0,None)
+        ansbeg.next=ans
+        flag=True
+        flag2=True
+        carry=0
+        
+        while flag:
+            if l1.val + l2.val+carry<10:
+                ans.val=l1.val + l2.val+carry
+            else:
+                ans.val=0
+                carry=(l1.val + l2.val)//10
+            
+            l1=l1.next
+            l2=l2.next
+            ans.next=ListNode(0,None)
+            print(ans.val)
+            ans=ans.next
+            if l1.next==None and l2.next==None:
+                ans.val=l1.val + l2.val+carry
+                print(ans.val)
+                break
+        
+        
+            
+        
+        
+            
+
+solobj=Solution()
+solobj.addTwoNumbers(l1,l2)
+
+
+
+
+#python 3
+
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        dummyHead = ListNode(0)
+        curr = dummyHead
+        carry = 0
+        while l1 != None or l2 != None or carry != 0:
+            l1Val = l1.val if l1 else 0
+            l2Val = l2.val if l2 else 0
+            columnSum = l1Val + l2Val + carry
+            carry = columnSum // 10
+            newNode = ListNode(columnSum % 10)
+            curr.next = newNode
+            curr = newNode
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
+        return dummyHead.next

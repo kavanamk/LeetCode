@@ -1,0 +1,28 @@
+class Solution(object):
+    def decodeMessage(self, key, message):
+        """
+        :type key: str
+        :type message: str
+        :rtype: str
+        """
+        
+        substitution='abcdefghijklmnopqrstuvwxyz'
+        dict={}
+        dict[' ']=' '
+        i=0
+        for k in key:
+            if k not in dict:
+                dict[k]=substitution[i]
+                i+=1
+                if i==26:
+                    break
+        output=''
+        for m in message:
+            output+=dict[m]
+        return output
+        
+key = "the quick brown fox jumps over the lazy dog"
+message = "vkbs bs t suepuv"
+
+obj=Solution()
+print(obj.decodeMessage(key, message))

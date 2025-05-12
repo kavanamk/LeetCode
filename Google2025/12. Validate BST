@@ -1,0 +1,28 @@
+class Node(object):
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution(object):
+    def isValidBST(self, root):
+        """
+        :type root: Node
+        :rtype: bool
+        """
+        # Helper function that checks the validity of the BST
+        def validate(node, low=float('-inf'), high=float('inf')):
+            # Base case: an empty node is valid
+            if not node:
+                return True
+            
+            # The current node's value must be between low and high
+            if not (low < node.val < high):
+                return False
+            
+            # Recursively validate the left and right subtrees
+            return (validate(node.left, low, node.val) and
+                    validate(node.right, node.val, high))
+        
+        # Start the recursion with the whole tree
+        return validate(root)

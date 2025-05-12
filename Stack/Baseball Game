@@ -1,0 +1,24 @@
+class Solution(object):
+    def calPoints(self, operations):
+        """
+        :type operations: List[str]
+        :rtype: int
+        """
+        result=[]
+        for x in ops:
+            i=len(result)-1
+            if x == "+":
+                result.append(result[i]+result[i-1])
+            elif x == "C":
+                result=result[0:i]
+            elif x== "D":
+                result.append(result[i]*10)
+            else:
+                result.append(int(x))
+            print(result)
+        return sum(result)
+            
+
+ops = ["5","2","C","D","+"]
+obj=Solution()
+print(obj.calPoints(ops))

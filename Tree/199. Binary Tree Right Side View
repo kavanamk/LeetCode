@@ -1,0 +1,57 @@
+class Node(object):
+    def __init__(self, val=0, left=None, right=None, next=None):
+        self.val = val
+        self.left = left
+        self.right = right
+        
+from collections import deque
+
+class Solution(object):
+    
+    def rightSideView(self, root):
+        if not root:
+            return
+        #
+        lstrightView=[]
+        # Initialize a queue for BFS
+        queue = deque([root])
+        lstcurrLevel=[]
+        
+        # Loop until the queue is empty
+        while queue:
+            # Get the current level size
+            level_size = len(queue)
+            
+            # Print all nodes at the current level
+            for _ in range(level_size):
+                # Dequeue the front node
+                current_node = queue.popleft()
+                lstcurrLevel.append(current_node.val)
+                
+                # Print the value of the current node (on the same level)
+                #print(current_node.val, end=" ")
+                
+                # Enqueue the left and right children if they exist
+                if current_node.left:
+                    queue.append(current_node.left)
+                if current_node.right:
+                    queue.append(current_node.right)
+            
+            # After finishing the current level, print a new line
+            lstrightView.append(lstcurrLevel.pop())
+            lstcurrLevel=[]
+            #print()  # Newline for the next level
+        
+        return (lstrightView)
+            
+        
+  
+        
+root=Node(1)
+root.left=Node(2)
+root.right=Node(3)
+root.left.right=Node(5)
+root.right.right=Node(4)
+obj=Solution()
+ans=obj.rightSideView(root)
+print(ans)

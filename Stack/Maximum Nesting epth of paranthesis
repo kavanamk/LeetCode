@@ -1,0 +1,20 @@
+Maximum Nesting epth of paranthesis
+
+def maxDepth(s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        count=0
+        maxdepth=0
+        stack=[]
+        
+        for c in s:
+            if c=="(":
+                stack.append(c)
+            if c==")":
+                if maxdepth<len(stack):
+                    maxdepth=len(stack)
+                stack.pop()
+            
+        return maxdepth

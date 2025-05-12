@@ -1,0 +1,48 @@
+import math
+class ListNode(object):
+    def __init__(self, val=0, next=None):
+         self.val = val
+         self.next = next
+         
+         
+class Solution(object):
+    def computeGCD(self,a,b):
+        return math.gcd(a,b)
+    
+    def insertGreatestCommonDivisors(self, head):
+        p1=head
+        if head.next==None:
+            return head
+        p2=head.next
+        while p2 is not None:
+            node=ListNode()
+            node.val=self.computeGCD(p1.val,p2.val)
+            p1.next=node
+            node.next=p2
+            p1=p2
+            p2=p2.next
+        return head
+    
+    
+   
+
+
+head=ListNode(18)
+first=ListNode(6)
+sec=ListNode(10)
+thr=ListNode(3)
+
+head.next=first
+first.next=sec
+sec.next=thr
+
+onj=Solution()
+
+head=onj.insertGreatestCommonDivisors(head)
+
+while(head is not None):
+    print(head.val)
+    head=head.next
+
+
+    

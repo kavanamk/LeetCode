@@ -1,0 +1,62 @@
+def removeOuterParentheses(s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        stack=[]
+        output=[]
+        primitives=[]
+        
+        for p in s:
+            if p=="(":
+                stack.append(p)
+            if p==")":
+                stack.pop()
+                primitives.append('()'*len(stack))
+        return primitives
+
+s="(())(())"
+print(removeOuterParentheses(s))
+
+
+
+class Solution(object):
+    def removeOuterParentheses(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+            # Stores the resultant string
+        res = ""
+    
+        # Stores the count of
+        # opened parentheses
+        count = 0
+    
+        # Traverse the string
+        for c in s:
+            
+            # If opening parentheses is
+            # encountered and their
+            # count exceeds 0
+            if (c == '(' and count > 0):
+    
+                # Include the character
+                res += c
+    
+            # If closing parentheses is
+            # encountered and their
+            # count is less than count
+            # of opening parentheses
+            if (c == '('):
+                count += 1
+            if (c == ')' and count > 1):
+    
+                # Include the character
+                res += c
+                
+            if (c == ')'):
+                count -= 1
+        
+        # Return the resultant string
+        return res

@@ -1,0 +1,34 @@
+class LinkedList:
+    def __init__(self,value):
+        self.value=value
+        self.next=None
+        
+def mean(head):
+    slow,fast=head,head
+    l=0
+    while fast!=None:
+        slow=slow.next
+        fast=fast.next.next
+        l+=1
+    return l
+        
+    
+
+head=LinkedList(1)
+n1=LinkedList(2)
+n2=LinkedList(3)
+n3=LinkedList(4)
+head.next=n1
+n1.next=n2
+n2.next=n3
+
+print(mean(head))
+ans=head
+"""
+while True:
+    print(ans.value)
+    if ans.next==None:
+        break
+    ans=ans.next
+    
+    """

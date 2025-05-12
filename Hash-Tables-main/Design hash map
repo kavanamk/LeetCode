@@ -1,0 +1,45 @@
+class Bucket:
+    def __init__(self):
+        # Initialize an empty list to store key-value pairs
+        self.bucket = []
+    
+    def get(self, key):
+        # Iterate through each key-value pair in the bucket
+        for (k, v) in self.bucket:
+            # If the key matches the provided key, return the corresponding value
+            if k == key:
+                return v
+        # If the key is not found, return -1
+        return -1
+
+    def update(self, key, value):
+        # Flag to indicate whether the key is found in the bucket
+        found = False
+        # Iterate through each key-value pair in the bucket
+        for i, kv in enumerate(self.bucket):
+            # If the key matches the key of the current key-value pair
+            if key == kv[0]:
+                # Update the value of the key-value pair
+                self.bucket[i] = (key, value)
+                # Set the flag to True, indicating that the key is found
+                found = True
+                break
+
+        # If the key is not found in the bucket, add it along with its value
+        if not found:
+            self.bucket.append((key, value))
+
+    def remove(self, key):
+        # Iterate through each key-value pair in the bucket
+        for i, kv in enumerate(self.bucket):
+            # If the key matches the key of the current key-value pair
+            if key == kv[0]:
+                # Delete the key-value pair from the bucket
+                del self.bucket[i]
+                # Exit the loop as the key has been removed
+                break
+
+
+def calculate_hash(key):
+    key_base = 2069
+    return key % key_base

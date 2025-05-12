@@ -1,0 +1,56 @@
+class Node(object):
+    def __init__(self, val=0, left=None, right=None, next=None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+        
+from collections import deque
+
+
+
+class Solution(object):
+    def averageOfLevels(self, root):
+        """
+        :type root: Node
+        :rtype: List[float]
+        """
+        if not root:
+            return []
+        
+        # Initialize a queue for BFS
+        queue = deque([root])
+        avg_lst = []
+        
+        # Loop until the queue is empty
+        while queue:
+            # Get the current level size (number of nodes at the current level)
+            level_size = len(queue)
+            level_sum = 0
+            
+            # Process each node at the current level
+            for _ in range(level_size):
+                # Dequeue the front node
+                current_node = queue.popleft()
+                level_sum += current_node.val  # Add the node value to the level sum
+                
+                # Enqueue the left and right children if they exist
+                if current_node.left:
+                    queue.append(current_node.left)
+                if current_node.right:
+                    queue.append(current_node.right)
+            
+            # Calculate the average for the current level and append to the result
+            avg_lst.append(round(level_sum / level_size, 5))  # Divide by number of nodes at the level
+        
+        return avg_lst
+        
+root=Node(3)
+root.left=Node(9)
+root.right=Node(20)
+root.left.left=Node(4)
+root.right.left=Node(15)
+root.right.right=Node(7)
+obj=Solution()
+ans=obj.averageOfLevels(root)
+

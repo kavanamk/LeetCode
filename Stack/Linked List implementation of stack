@@ -1,0 +1,37 @@
+class LinkedList:
+    def __init__(self, val):
+        self.data = val
+        self.next = None
+        
+class Stack(LinkedList):
+    
+    top = LinkedList(1)
+    
+    def isEmpty(self):
+        return self.top == None
+    
+    def push(self,element):
+        old_top = self.top
+        self.top = LinkedList(element)
+        self.top.next = old_top
+        
+    def pop(self):
+        pop_value = self.top.data
+        self.top = self.top.next
+        return pop_value
+    
+    def printStack(self):
+        head = self.top
+        while head:
+            print(head.data)
+            head = head.next
+    
+
+obj = Stack(None)
+obj.push(2)
+obj.push(3)
+obj.printStack()
+print(obj.pop())
+
+        
+        

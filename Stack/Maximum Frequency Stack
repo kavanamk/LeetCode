@@ -1,0 +1,63 @@
+class FreqStack(object):
+
+    def __init__(self):
+        self.stack=list()
+        self.dict={}
+    
+    def mostFreqDict(self,d):
+        max_val=1
+        for key,val in d.items():
+            if val>=max_val:
+                max_key=key
+                max_val=val
+        
+        return max_key
+        
+        
+        
+        
+
+    def push(self, val):
+        """
+        :type val: int
+        :rtype: None
+        """
+        self.stack.append(val)
+        if not val in self.dict:
+            self.dict[val]=1
+        else:
+            self.dict[val]+=1
+        #print(self.stack)
+        #print(self.dict)
+            
+        
+
+    def pop(self):
+        """
+        :rtype: int
+        """
+        most_freq_key=self.mostFreqDict(self.dict)
+        
+        n=len(self.stack)
+        self.stack.reverse()
+        for i in range(0,n):
+            if self.stack[i]==most_freq_key:
+                self.stack.remove(most_freq_key)
+                self.stack.reverse()
+                print(self.stack)
+                self.dict[most_freq_key]-=1
+                return most_freq_key
+        
+obj = FreqStack()
+obj.push(5)
+obj.push(7)
+obj.push(5)
+obj.push(7)
+obj.push(4)
+obj.push(5)
+param_2 = obj.pop()
+print(param_2)
+param_2 = obj.pop()
+print(param_2)
+param_2 = obj.pop()
+print(param_2)

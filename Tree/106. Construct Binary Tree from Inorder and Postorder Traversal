@@ -1,0 +1,58 @@
+# Definition for a binary tree node.
+class TreeNode(object):
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution(object):
+    def buildTree(self, inorder, postorder):
+        """
+        :type inorder: List[int]
+        :type postorder: List[int]
+        :rtype: TreeNode
+        """
+        # Base case: if either inorder or postorder is empty, return None
+        if not inorder or not postorder:
+            return None
+        
+        # The last element in postorder is the root of the current tree
+        rootVal = postorder.pop()  # Get and remove the last element in postorder
+        root = TreeNode(rootVal)
+        
+        # Find the index of the root in inorder list to split the tree into left and right subtrees
+        inorderIndex = inorder.index(rootVal)
+        
+        # Recursively build the right and left subtrees
+        root.right = self.buildTree(inorder[inorderIndex+1:], postorder)  # Right subtree
+        root.left = self.buildTree(inorder[:inorderIndex], postorder)     # Left subtree
+        
+        return root
+
+        
+        
+
+inorder = [9,3,15,20,7]
+postorder = [9,15,7,20,3]
+obj=Solution()
+ans=obj.buildTree(inorder, postorder)
+def inorder_traversal(root):
+    if root:
+        inorder_traversal(root.left)
+        print(root.val, end=' ')
+        inorder_traversal(root.right)
+
+def preorder_traversal(root):
+    if root:
+        print(root.val, end=' ')
+        preorder_traversal(root.left)
+        preorder_traversal(root.right)
+        
+def postorder_traversal(root):
+    if root:
+        postorder_traversal(root.left)
+        postorder_traversal(root.right)
+        print(root.val, end=' ')
+
+#print("Pre\n")
+preorder_traversal(ans)

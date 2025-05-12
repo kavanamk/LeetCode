@@ -1,0 +1,18 @@
+def validParanthesis(s):
+    stack=[]
+    for p in s:
+        if p=='[' or p=='{' or p=='(':
+            stack.append(p)
+        else:
+            if stack==[]:
+                return False
+            if p==')' and stack[-1]=='(':
+                stack.pop()
+            if p=='}' and stack[-1]=='{':
+                stack.pop()
+            if p==']' and stack[-1]=='[':
+                stack.pop()
+    if stack==[]:
+        return True
+    return False
+    

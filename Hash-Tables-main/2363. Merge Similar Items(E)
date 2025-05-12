@@ -1,0 +1,26 @@
+class Solution(object):
+    def mergeSimilarItems(self, items1, items2):
+        """
+        :type items1: List[List[int]]
+        :type items2: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        dict={}
+        concatenated_list = items1 + items2
+        for item in concatenated_list:
+            key, weight = item[0], item[1]
+            if key not in dict:
+                dict[key]=weight
+            else:
+                dict[key]+=weight
+       
+        output=[[key,weight] for key,weight in dict.items()]
+        return output
+        
+                
+        
+
+items1 = [[1,1],[4,5],[3,8]]
+items2 = [[3,1],[1,5]]
+os=Solution()
+print(os.mergeSimilarItems(items1, items2))

@@ -1,0 +1,16 @@
+class Solution(object):
+    def removeStars(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        stack=[]
+        for x in s:
+            if x=='*':
+                stack.pop()
+            else:
+                stack.append(x)
+        ans=''
+        for x in stack:
+            ans+=x
+        return ans

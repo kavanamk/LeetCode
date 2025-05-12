@@ -1,0 +1,31 @@
+class Solution(object):
+    def simplifyPath(self, path):
+        """
+        :type path: str
+        :rtype: str
+        """
+        # Split the path by '/' to get individual components
+        components = path.split('/')
+        result = []
+
+        # Iterate over each component in the path
+        for component in components:
+            if component == "" or component == ".":
+                # Ignore empty components and '.' (current directory)
+                continue
+            elif component == "..":
+                # Go to the parent directory, so remove the last element if available
+                if result:
+                    result.pop()
+            else:
+                # Add valid directory names to the result
+                result.append(component)
+
+        # Join the components in result with '/' and return the simplified path
+        return "/" + "/".join(result)
+
+
+# Test case
+path = "/home/user/Documents/../Pictures"
+sol = Solution()
+print(sol.simplifyPath(path))  # Expected Output: /home/user/Pictures

@@ -1,0 +1,15 @@
+class Solution:
+    def distinctDifferenceArray(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        diff = [0] * n
+        prefix_set = set()
+        suffix_counter = Counter(nums)
+
+        for i in range(n):
+            prefix_set.add(nums[i])
+            suffix_counter[nums[i]] -= 1
+            if suffix_counter[nums[i]] == 0:
+                del suffix_counter[nums[i]]
+            diff[i] = len(prefix_set) - len(suffix_counter)
+
+        return diff

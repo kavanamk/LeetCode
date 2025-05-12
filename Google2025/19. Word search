@@ -1,0 +1,50 @@
+class Solution(object):
+    def exist(self, board, word):
+        """
+        :type board: List[List[str]]
+        :type word: str
+        :rtype: bool
+        """
+        n = len(board)
+        m = len(board[0])
+        
+        # Helper function to perform backtracking
+        def backtrack(i, j, k):
+            # Base case: If all characters are matched
+            if k == len(word):
+                return True
+            
+            # Check if out of bounds or mismatch
+            if i < 0 or i >= n or j < 0 or j >= m or board[i][j] != word[k]:
+                return False
+            
+            # Temporarily mark the current cell as visited
+            temp = board[i][j]
+            board[i][j] = "#"
+            
+            # Explore all four directions: up, down, left, right
+            found = (backtrack(i+1, j, k+1) or  # Down
+                     backtrack(i-1, j, k+1) or  # Up
+                     backtrack(i, j+1, k+1) or  # Right
+                     backtrack(i, j-1, k+1))    # Left
+            
+            # Restore the original value for backtracking
+            board[i][j] = temp
+            
+            return found
+        
+        # Iterate over all cells in the board
+        for i in range(n):
+            for j in range(m):
+                # Start the backtracking from any matching starting letter
+                if board[i][j] == word[0] and backtrack(i, j, 0):
+                    return True
+        
+        return False
+
+# Example usage:
+board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
+word = "SEE"
+
+obj = Solution()
+print(obj.exist(board, word))  # Output: True

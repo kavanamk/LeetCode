@@ -1,0 +1,29 @@
+class OrderedStream(object):
+
+    def __init__(self, n):
+        """
+        :type n: int
+        """
+        self.dict = {}
+        for i in range(1, n + 1):
+            self.dict[i] = ''
+
+    def insert(self, idKey, value):
+        """
+        :type idKey: int
+        :type value: str
+        :rtype: List[str]
+        """
+        self.dict[idKey] = value
+        output = []
+        for key, val in self.dict.items():
+            output.append(val)
+        return output
+
+os = OrderedStream(5)
+
+print(os.insert(3, "ccccc"))
+os.insert(1, "aaaaa")
+os.insert(2, "bbbbb")
+os.insert(5, "eeeee")
+os.insert(4, "ddddd")

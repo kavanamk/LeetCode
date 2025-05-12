@@ -1,0 +1,34 @@
+# Definition for singly-linked list.
+class ListNode(object):
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+        
+l1=ListNode(1,None)
+l2=ListNode(2,None)
+l3=ListNode(3,None)
+l4=ListNode(4,None)
+l1.next=l2
+l2.next=l3
+l3.next=l4
+
+def swapPairs(head):
+    
+	#if not head: return head
+
+    prev, cur, ans = None, head, head.next
+    while cur and cur.next:
+        adj = cur.next
+        if prev: prev.next = adj
+    
+        cur.next, adj.next = adj.next, cur
+        prev, cur = cur, cur.next
+    
+    return ans or head
+
+    
+
+head=swapPairs(l1)
+while head!=None:
+    print(head.val)
+    head=head.next

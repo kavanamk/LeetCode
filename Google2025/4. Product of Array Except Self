@@ -1,0 +1,27 @@
+class Solution(object):
+    
+    def productOfList(self, nums):
+        ans=1
+        for num in nums:
+            ans *= num
+        return ans
+    
+    def productExceptSelf(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        n = len(nums)
+        ans = [1] * n
+        
+        for i in range(n):
+            prefix_prod = self.productOfList(nums[:i])
+            postfix_prod = self.productOfList(nums[i+1:])
+            ans[i]=prefix_prod * postfix_prod
+            
+        return ans
+
+
+nums = [-1,1,0,-3,3]
+obj=Solution()
+print(obj.productExceptSelf(nums))

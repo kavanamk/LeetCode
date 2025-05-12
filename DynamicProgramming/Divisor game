@@ -1,0 +1,28 @@
+#woke up at 5 contemplating life
+#gotta optimize sleep before I can achive the degree of neuro plasticity I require to be a Google Engineer
+
+class Solution(object):
+    
+    def markDict(self,n):
+        marked={}
+        for i in range(n):
+            marked[i]=-1
+            return marked
+        
+    def divisorGame(self, n,marked):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        
+        for x in range(1,n):
+            if n%x==0 and marked[x]==-1:
+                marked[x]=x
+            
+        return False
+
+
+
+obj=Solution()
+m=obj.markDict(3)
+print(obj.divisorGame(3,m))

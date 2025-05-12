@@ -1,0 +1,24 @@
+class Solution(object):
+    def permute(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        # Base case: if there's only one element, return it wrapped in a list of lists.
+        if len(nums) == 1:
+            return [nums]
+        
+        # This will store all permutations.
+        output = []
+
+        # Iterate through each element in nums.
+        for i in range(len(nums)):
+            # Create a new list excluding the current element nums[i]
+            remaining = nums[:i] + nums[i+1:]
+
+            # Recursive call to find all permutations of the remaining elements.
+            for perm in self.permute(remaining):
+                # Concatenate current element with each of the permutations of the remaining elements.
+                output.append([nums[i]] + perm)
+        
+        return output

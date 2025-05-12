@@ -1,0 +1,25 @@
+class Solution(object):
+    def splitList(self,n,array):
+        sublists = [array[i:i + n] for i in range(0, len(array), n)]
+        return sublists
+        
+        
+    def groupThePeople(self, groupSizes):
+        """
+        :type groupSizes: List[int]
+        :rtype: List[List[int]]
+        """
+        output=[]
+        dict={}
+        for i in range(0,len(groupSizes)):
+            if groupSizes[i] not in dict:
+                dict[groupSizes[i]]=[]
+                dict[groupSizes[i]].append(i)
+            else:
+                dict[groupSizes[i]].append(i)
+        print(dict)
+        for key, value in dict.items():
+            sublists = self.splitList(key, value)
+            for sublist in sublists:
+                output.append(sublist)
+        return output

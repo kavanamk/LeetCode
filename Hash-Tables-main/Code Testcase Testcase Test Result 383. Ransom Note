@@ -1,0 +1,22 @@
+class Solution(object):
+    def canConstruct(self, ransomNote, magazine):
+        """
+        :type ransomNote: str
+        :type magazine: str
+        :rtype: bool
+        """
+        # Create a dictionary to count the frequency of each letter in the magazine
+        letter_count = {}
+        for letter in magazine:
+            if letter in letter_count:
+                letter_count[letter] += 1
+            else:
+                letter_count[letter] = 1
+
+        # Check if the ransom note can be constructed using the letters in the magazine
+        for letter in ransomNote:
+            if letter not in letter_count or letter_count[letter] == 0:
+                return False
+            letter_count[letter] -= 1
+
+        return True

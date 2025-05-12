@@ -1,0 +1,39 @@
+def solveAirthmeticExpression(a,b,op):
+    if op=='+':
+        return a+b
+    if op=='-':
+        return a-b
+    if op=='*':
+        return a*b
+    if op=='/':
+        return a/b
+    
+
+def DijkstraStack(s):
+    value = []
+    operation = []
+    
+    for x in s:
+        if x == '(':
+            pass
+        
+        elif x == '+' or x == '-' or x=='*' or x=='/':
+            operation.append(x)
+        
+        elif x==')':
+            a=value.pop()
+            b=value.pop()
+            op=operation.pop()
+            value.append(solveAirthmeticExpression(int(a), int(b), op))
+            
+        else:
+            value.append(x)
+            
+        #print(value)
+        #print(operation)
+            
+    return value
+    
+s='(1+(5*(4*5)))'
+print(DijkstraStack(s))
+            

@@ -1,0 +1,26 @@
+from collections import defaultdict
+from typing import List
+
+def find_duplicate(paths):
+    file_map = defaultdict(list)
+    
+    for path in paths:
+        values = path.split(' ')
+        
+        for i in range(1, len(values)):
+            name_content = values[i].split('(')
+            content = name_content[1][:-1]
+
+            directory = values[0]
+            file_name = name_content[0]
+            file_path = f"{directory}/{file_name}"
+            
+            file_map[content].append(file_path)
+    
+    result = []
+    
+    for paths in file_map.values():
+        if len(paths) > 1:
+            result.append(paths)
+    
+    return result

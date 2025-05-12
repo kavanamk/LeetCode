@@ -1,0 +1,47 @@
+import heapq
+
+class Node(object):
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution(object):
+    
+    def __init__(self):
+        self.heap=[]
+        
+    def create_heap(self,root):
+        if root:
+            self.create_heap(root.left)
+            heapq.heappush(self.heap, root.val)
+            self.create_heap(root.right)
+            
+            
+    def kthSmallest(self, root, k):
+        
+        if not root:
+            return None
+        
+        self.create_heap(root)
+        for i in range(0,k-1):
+            heapq.heappop(self.heap)
+        
+        return heapq.heappop(self.heap)
+            
+        
+        
+
+# Example usage
+root = Node(5)
+root.left = Node(3)
+root.right = Node(6)
+
+root.left.left = Node(2)
+root.left.right = Node(4)
+
+root.left.left.left = Node(1)
+
+solution = Solution()
+ans=solution.kthSmallest(root, k=3)  
+print(ans)

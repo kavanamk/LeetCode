@@ -1,0 +1,49 @@
+class DinnerPlates(object):
+
+    def __init__(self, capacity):
+        """
+        :type capacity: int
+        """
+        self.capacity=capacity
+        self.stack=[]
+        
+
+    def push(self, val):
+        """
+        :type val: int
+        :rtype: None
+        """
+        self.stack.append(val)
+        
+
+    def pop(self):
+        """
+        :rtype: int
+        """
+        return self.stack.pop()
+        
+
+    def popAtStack(self, index):
+        """
+        :type index: int
+        :rtype: int
+        """
+        
+        start=(self.capacity*index)
+        stop=start+self.capacity
+        
+        return self.stack[start:stop].pop()
+        
+
+
+# Your DinnerPlates object will be instantiated and called as such:
+capacity=2
+obj = DinnerPlates(capacity)
+obj.push(1)
+obj.push(2)
+obj.push(3)
+obj.push(4)
+obj.push(5)
+
+param_3 = obj.popAtStack(0)
+print(param_3)

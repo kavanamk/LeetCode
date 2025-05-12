@@ -1,0 +1,37 @@
+# Definition for a binary tree node.
+class TreeNode(object):
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+        
+class Solution(object):
+    def __init__(self):
+        self.count=0
+        
+    def inorder_traversal(self,root):
+        if root:
+            self.inorder_traversal(root.left)
+            #print(root.val, end=' ')
+            self.count+=1
+            self.inorder_traversal(root.right)
+        
+    def countNodes(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        self.inorder_traversal(root)
+        return self.count
+        
+        
+        
+root=TreeNode(1)
+root.left=TreeNode(2)
+root.right=TreeNode(3)
+root.left.left=TreeNode(4)
+root.left.right=TreeNode(5)
+root.right.left=TreeNode(6)
+obj=Solution()
+ans=obj.countNodes(root)
+print(ans)

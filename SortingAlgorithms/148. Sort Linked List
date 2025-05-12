@@ -1,0 +1,60 @@
+class ListNode(object):
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution(object):
+    def sortList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        # Base case: if head is null or there is only one node
+        if not head or not head.next:
+            return head
+        
+        # Step 1: Split the list into two halves
+        mid = self.getMiddle(head)  # Get the middle of the list
+        right = mid.next
+        mid.next = None  # Split the list into two halves
+
+        # Step 2: Recursively sort both halves
+        left = self.sortList(head)
+        right = self.sortList(right)
+
+        # Step 3: Merge the sorted halves
+        return self.merge(left, right)
+
+    def getMiddle(self, head):
+        """
+        This function will return the middle node of the linked list.
+        """
+        slow, fast = head, head
+        while fast.next and fast.next.next:
+            slow = slow.next
+            fast = fast.next.next
+        return slow
+
+    def merge(self, l1, l2):
+        """
+        This function will merge two sorted linked lists.
+        """
+        dummy = ListNode(0)
+        tail = dummy
+
+        while l1 and l2:
+            if l1.val < l2.val:
+                tail.next = l1
+                l1 = l1.next
+            else:
+                tail.next = l2
+                l2 = l2.next
+            tail = tail.next
+        
+        # If either list still has remaining nodes, append them
+        if l1:
+            tail.next = l1
+        if l2:
+            tail.next = l2
+
+        return dummy.next

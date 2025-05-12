@@ -1,0 +1,24 @@
+from collections import defaultdict
+
+class Solution(object):
+    def groupAnagrams(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: List[List[str]]
+        """
+        # Create a defaultdict to store groups of anagrams
+        anagram_groups = defaultdict(list)
+
+        # Iterate through each string in the input list
+        for s in strs:
+            # Sort the characters of the string and use it as a key
+            sorted_key = ''.join(sorted(s))
+            # Add the string to the corresponding group
+            anagram_groups[sorted_key].append(s)
+
+        # Convert the values of the defaultdict to a list to get the result
+        result = list(anagram_groups.values())
+
+        return result
+
+        

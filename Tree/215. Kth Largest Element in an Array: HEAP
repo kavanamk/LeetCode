@@ -1,0 +1,25 @@
+import heapq
+
+class Solution(object):
+    def findKthLargest(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        if not nums:
+            return None
+        # Convert nums into a min-heap
+        heapq.heapify(nums)
+        # Pop elements from the heap (len(nums) - k) times to find the k-th largest
+        for _ in range(len(nums) - k):
+            heapq.heappop(nums)
+        return heapq.heappop(nums)
+
+        
+nums = [3,2,1,5,6,4]
+k = 2
+
+sol = Solution()
+ans = sol.findKthLargest(nums, k)
+print(ans)

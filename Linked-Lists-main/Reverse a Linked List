@@ -1,0 +1,28 @@
+class LinkedList:
+    def __init__(self,value):
+        self.value=value
+        self.next=None
+        
+def reverse_linkedlist(head):
+    prev,cur=None,head
+    while cur:
+        nxt=cur.next
+        cur.next=prev
+        prev=cur
+        cur=nxt
+    return prev
+    
+
+head=LinkedList(1)
+n1=LinkedList(2)
+n2=LinkedList(3)
+head.next=n1
+n1.next=n2
+
+ans=reverse_linkedlist(head)
+
+while True:
+    print(ans.value)
+    if ans.next==None:
+        break
+    ans=ans.next

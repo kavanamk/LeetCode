@@ -1,0 +1,15 @@
+ // EXERCISE 7: given the definition of the function "sumTailAux" below,
+  // complete the definition of the function "sumTail" so that it also sums a
+  // list of integers.
+  //
+  // You must not alter the definition of "sumTailAux".
+  //
+  // Your definition for "sumTail" must call "sumTailAux" directly, and must
+  // not call "sum"
+  def sumTailAux(xs: List[Int], accumulator: Int): Int =
+    xs match
+      case Nil     => accumulator
+      case y :: ys => sumTailAux(ys, accumulator + y)
+
+  def sumTail(xs: List[Int]): Int =
+    sumTailAux(xs, 0)

@@ -1,0 +1,24 @@
+def twoSum(nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        #create a dict of nums
+        d= {}
+        
+        
+        for idx,num in enumerate(nums):
+            compliment = target-num
+            if compliment in d:
+                return [d[compliment],idx]
+            else:
+                d[num]=idx
+        
+        
+        
+        
+        
+nums = [2,7,11,15]
+target = 9
+print(twoSum(nums, target))

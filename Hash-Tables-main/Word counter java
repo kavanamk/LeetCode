@@ -1,0 +1,30 @@
+import java.io.*;
+import java.nio.file.*;
+import java.util.*;
+
+public class WordCounter {
+    public static void main(String[] args) throws IOException {
+        Path inputDir = Paths.get(args[0]);
+        Path outputDir = Paths.get(args[1]);
+
+        Files.walk(inputDir)
+            .filter(Files::isRegularFile)
+            .forEach(inputFile -> {
+                try {
+                    Map<String, Integer> wordCounts = new HashMap<>();
+                    Files.readAllLines(inputFile)
+                        .stream()
+                        .flatMap(line -> Arrays.stream(line.split("\\W+")))
+                        .forEach(word -> wordCounts.put(word, wordCounts.getOrDefault(word, 0) + 1));
+
+                    Path outputFile = outputDir.resolve(inputDir.relativize(inputFile));
+                    Files.createDirectories(outputFile.getParent());
+                    try (PrintWriter writer = new PrintWriter(Files.newBufferedWriter(outputFile))) {
+                        wordCounts.forEach((word, count) -> writer.println(word + " " + count));
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+    }
+}

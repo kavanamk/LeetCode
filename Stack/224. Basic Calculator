@@ -1,0 +1,66 @@
+class Solution(object):
+    def evalOp(self, n2, n1, op):
+        if op == "+":
+            return n1 + n2
+        elif op == "-":
+            return n1 - n2
+        elif op == "*":
+            return n1 * n2
+        elif op == "/":
+            return int(n1 / n2)  # Ensure integer division
+
+    def calculate(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        numStack = []
+        opStack = []
+        i = 0
+
+        # Remove spaces for easier token processing
+        s = s.replace(" ", "")
+        n = len(s)
+
+        while i < n:
+            if s[i].isdigit():  # handle multi-digit numbers
+                num = 0
+                while i < n and s[i].isdigit():
+                    num = num * 10 + int(s[i])
+                    i += 1
+                numStack.append(num)
+                continue  # since i is already updated inside the loop
+
+            elif s[i] in "+-*/":  # operator
+                while (opStack and opStack[-1] in "+-*/" and
+                       ((s[i] in "+-" and opStack[-1] in "+-*/") or
+                        (s[i] in "*/" and opStack[-1] in "*/"))):
+                    op = opStack.pop()
+                    n1 = numStack.pop()
+                    n2 = numStack.pop()
+                    numStack.append(self.evalOp(n1, n2, op))
+                opStack.append(s[i])
+
+            elif s[i] == "(":  # open parenthesis
+                opStack.append(s[i])
+
+            elif s[i] == ")":  # close parenthesis
+                while opStack[-1] != "(":
+                    op = opStack.pop()
+                    n1 = numStack.pop()
+                    n2 = numStack.pop()
+                    numStack.append(self.evalOp(n1, n2, op))
+                opStack.pop()  # pop the "("
+
+            i += 1
+
+        # Apply remaining operations
+        while opStack:
+            op = opStack.pop()
+            n1 = numStack.pop()
+            n2 = numStack.pop()
+            numStack.append(self.evalOp(n1, n2, op))
+
+        return numStack[0]
+
+

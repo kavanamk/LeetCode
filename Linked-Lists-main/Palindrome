@@ -1,0 +1,45 @@
+class LinkedList:
+    def __init__(self,value):
+        self.value=value
+        self.next=None
+        
+def isPalindrome(head):
+    slow,fast=head,head
+    
+    # find middle
+    while fast and fast.next:
+        fast=fast.next.next
+        slow=slow.next
+    
+    # reverse second half
+    
+    prev=None
+    while slow:
+        tmp=slow.next
+        slow.next=prev
+        prev=slow
+        slow=tmp
+        
+    # check pali
+    left,right=head,prev
+    while right:
+        if left.value!=right.value:
+            return False
+        left=left.next
+        right=right.next
+    return True
+        
+    
+
+head=LinkedList(1)
+n1=LinkedList(2)
+n2=LinkedList(2)
+n3=LinkedList(1)
+head.next=n1
+n1.next=n2
+n2.next=n3
+
+ans=isPalindrome(head)
+
+print(ans)
+    

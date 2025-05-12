@@ -1,0 +1,36 @@
+class LinkedList:
+    def __init__(self,key):
+        self.val=key
+        self.next=None
+        
+def remove_nth_last_node(head, n):
+    
+    p1=head
+    p2=head
+    
+    for i in range(n):
+        if p2.next is None:  
+            return head.next
+        p2 = p2.next
+        
+    while p2.next!=None:
+        p1=p1.next
+        p2=p2.next
+        
+    p1.next=p1.next.next
+    
+    return head
+
+l1=LinkedList(1)
+l2=LinkedList(2)
+l3=LinkedList(3)
+l4=LinkedList(4)
+
+l1.next=l2
+l2.next=l3
+l3.next=l4
+
+ans= remove_nth_last_node(l1, 2)
+while ans:
+    print(ans.val)
+    ans=ans.next

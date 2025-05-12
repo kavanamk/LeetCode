@@ -1,0 +1,41 @@
+import heapq
+
+class Solution(object):
+    def kSmallestPairs(self, nums1, nums2, k):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :type k: int
+        :rtype: List[List[int]]
+        """
+        if not nums1 or not nums2 or k == 0:
+            return []
+
+        # Min-heap to store the sum and pairs
+        heap = []
+        result = []
+
+        # Initialize the heap with the first pair of nums1 with every element of nums2
+        # We push tuples of the form (sum, i, j) where sum = nums1[i] + nums2[j]
+        for i in range(min(k, len(nums1))):  # We don't need to push more than k elements
+            heapq.heappush(heap, (nums1[i] + nums2[0], i, 0))
+
+        # Extract k smallest pairs from the heap
+        while heap and len(result) < k:
+            current_sum, i, j = heapq.heappop(heap)
+            result.append([nums1[i], nums2[j]])
+
+            # If possible, push the next pair (i, j+1) from nums1[i] and nums2
+            if j + 1 < len(nums2):
+                heapq.heappush(heap, (nums1[i] + nums2[j+1], i, j+1))
+
+        return result
+
+# Example usage:
+nums1 = [1, 7, 11]
+nums2 = [2, 4, 6]
+k = 3
+
+sol = Solution()
+ans = sol.kSmallestPairs(nums1, nums2, k)
+print(ans)

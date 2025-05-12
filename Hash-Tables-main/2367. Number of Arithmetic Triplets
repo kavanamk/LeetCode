@@ -1,0 +1,34 @@
+class Solution(object):
+    def arithmeticTriplets(self, nums, diff):
+        """
+        :type nums: List[int]
+        :type diff: int
+        :rtype: int
+        """
+        dict={}
+        for num in nums:
+            if num-diff in nums:
+                print(num,(num-diff))
+                if num not in dict:
+                    dict[num]=[]
+                    dict[num].append(num-diff)
+                else:
+                    dict[num].append(num-diff)
+        print(dict)
+        lis=[]
+        for key,val in dict.items():
+            if key not in lis:
+                lis.append(key)
+            for v in val:
+                if v not in lis:
+                    lis.append(v)
+        print(lis)
+            
+                
+        return None
+
+
+nums = [0,1,4,6,7,10]
+diff = 3
+os=Solution()
+print(os.arithmeticTriplets(nums, diff))

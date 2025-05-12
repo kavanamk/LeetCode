@@ -1,0 +1,35 @@
+class Node(object):
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
+class Solution(object):
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        if not root:
+            return None
+        if root.left.val>root.val or root.right.val<root.val:
+            return False
+        self.isValidBST(root.left)
+        self.isValidBST(root.right)
+        
+        return True
+        
+        
+
+
+root = Node(5)
+root.left = Node(1)
+root.right = Node(4)
+root.right.left = Node(3)
+root.right.right = Node(6)
+
+
+solution = Solution()
+ans=solution.isValidBST(root)
+print(ans)

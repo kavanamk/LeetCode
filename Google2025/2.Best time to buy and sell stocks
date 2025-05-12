@@ -1,0 +1,25 @@
+def maxProfit(prices):
+    """
+    :type prices: List[int]
+    :rtype: int
+    """
+    min_price = float('inf')  # Initialize min_price to a very large number
+    max_profit = 0  # Initialize max_profit to 0
+
+    for price in prices:
+        # Update min_price if the current price is lower
+        if price < min_price:
+            min_price = price
+        
+        # Calculate the profit if sold at the current price
+        profit = price - min_price
+        
+        # Update max_profit if this profit is greater
+        if profit > max_profit:
+            max_profit = profit
+
+    return max_profit
+
+# Example usage:
+prices = [7, 1, 5, 3, 6, 4]
+print(maxProfit(prices))  # Output: 5 (Buy at 1 and sell at 6)

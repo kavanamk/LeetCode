@@ -1,0 +1,43 @@
+from collections import deque
+
+class Node:
+    def __init__(self, val=0, left=None, right=None, next=None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        if not root:
+            return None
+        
+        # Initialize the queue with the root node
+        queue = deque([root])
+        
+        # Perform level-order traversal
+        while queue:
+            size = len(queue)
+            prev_node = None
+            
+            # Iterate through all nodes at the current level
+            for i in range(size):
+                node = queue.popleft()
+                
+                # Link the current node's next pointer to the previous node
+                if prev_node:
+                    prev_node.next = node
+                
+                # Update the previous node to the current node
+                prev_node = node
+                
+                # Add the left and right children to the queue if they exist
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            
+            # At the end of the level, set the next pointer of the last node to None
+            prev_node.next = None
+        
+        return root

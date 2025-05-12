@@ -1,0 +1,59 @@
+# Definition for a binary tree node.
+class TreeNode(object):
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+        
+class Solution(object):
+    def isSymmetric(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        # Helper function to check if two subtrees are mirrors
+        def isMirror(left, right):
+            if left is None and right is None:
+                return True
+            if left is None or right is None:
+                return False
+            return (left.val == right.val) and \
+                   isMirror(left.left, right.right) and \
+                   isMirror(left.right, right.left)
+        
+        # The tree is symmetric if the left and right subtrees are mirrors
+        return isMirror(root.left, root.right) if root else True
+
+        
+root=TreeNode(1)
+root.left=TreeNode(2)
+root.right=TreeNode(2)
+root.left.left=TreeNode(3)
+root.left.right=TreeNode(4)
+root.right.left=TreeNode(4)
+root.right.right=TreeNode(3)
+obj=Solution()
+ans=obj.isSymmetric(root)
+print(ans)
+
+
+def inorder_traversal(root):
+    if root:
+        inorder_traversal(root.left)
+        print(root.val, end=' ')
+        inorder_traversal(root.right)
+
+def preorder_traversal(root):
+    if root:
+        print(root.val, end=' ')
+        preorder_traversal(root.left)
+        preorder_traversal(root.right)
+        
+def postorder_traversal(root):
+    if root:
+        postorder_traversal(root.left)
+        postorder_traversal(root.right)
+        print(root.val, end=' ')
+
+print("Pre\n")
+preorder_traversal(root)

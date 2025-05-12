@@ -1,0 +1,38 @@
+class MinStack(object):
+
+    def __init__(self):
+
+        self.stack = []  # Main stack to store values
+        self.min_stack = [] 
+        
+
+    def push(self, val):
+        """
+        :type val: int
+        :rtype: None
+        """
+        self.stack.append(val)
+        self.minstack=self.stack.sort()
+        
+
+    def pop(self):
+        """
+        :rtype: None
+        """
+        return self.stack.pop()
+        
+
+    def top(self):
+        """
+        :rtype: int
+        """
+        n=len(self.stack)
+        return self.stack[n-1]
+        
+
+    def getMin(self):
+        """
+        :rtype: int
+        """
+        return self.min_stack[0]
+        

@@ -1,0 +1,33 @@
+def topologicalSort(graph, node, stack, visited):
+    # If the node has already been visited, skip it
+    if node not in visited:
+        visited.add(node)
+        
+        # Visit all neighbors (recursive DFS)
+        for neighbor in graph[node]:
+            topologicalSort(graph, neighbor, stack, visited)
+        
+        # After all neighbors are visited, add the current node to the stack
+        stack.append(node)
+    
+    return stack
+
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D'],
+    'C': ['D'],
+    'D': [],
+}
+
+stack = []
+visited = set()
+
+# Call the function for each node (in case the graph is disconnected)
+
+topologicalSort(graph, 'A', stack, visited)
+print(stack)
+# Reverse the stack to get the topological order
+topological_order = stack[::-1]
+
+print(topological_order)  # Output: ['A', 'C', 'B', 'D'] (One valid topological sort)

@@ -1,0 +1,31 @@
+class MenuItem:
+    def __init__(self, icon=None, sub_menu_items=None):
+        self.icon = icon  # Icon can be None or some string/path
+        self.sub_menu_items = sub_menu_items or []  # List of sub-menu items
+
+    def getIcon(self):
+        """Returns True if the icon is present."""
+        return self.icon is not None
+
+    def isIconPresent(self):
+        """Returns True if all items (and submenus) have icons, otherwise False."""
+        # Check if the current menu item has an icon
+        if not self.getIcon():
+            return False
+
+        # Recursively check all submenu items
+        for submenu in self.sub_menu_items:
+            if not submenu.isIconPresent():
+                return False
+
+        return True
+# Create menu items with and without icons
+item1 = MenuItem(icon="home.png")
+item2 = MenuItem(icon="settings.png")
+item3 = MenuItem(icon="rand.png")  # No icon
+
+# Create a parent menu with submenus
+main_menu = MenuItem(icon="menu.png", sub_menu_items=[item1, item2, item3])
+
+# Check if all menu items (including submenus) have icons
+print(main_menu.isIconPresent())  # Output: False

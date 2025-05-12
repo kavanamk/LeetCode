@@ -1,0 +1,62 @@
+def maximum_profit_path(p):
+    n = len(p)
+    q = [[0 for _ in range(n)] for _ in range(n)]
+
+    # Initialize the first row and first column of q
+    q[0][0] = p[0][0]
+    for i in range(1, n):
+        q[i][0] = q[i-1][0] + p[i][0]
+        q[0][i] = q[0][i-1] + p[0][i]
+
+    # Fill in the rest of q
+    for i in range(1, n):
+        for j in range(1, n):
+            q[i][j] = max(q[i-1][j], q[i][j-1]) + p[i][j]
+
+    # Return the maximum profit value at the lower right corner
+    print_matrix(q)
+    return q
+
+
+def print_matrix(matrix):
+    for row in matrix:
+        print(' '.join(map(str, row)))
+
+def print_maximum_path(q):
+    n = len(q)
+    path = [(n-1, n-1)]  # Start from the lower right corner
+    i, j = n-1, n-1
+    while i > 0 or j > 0:
+        if i == 0:
+            path.append((0, j-1))
+            j -= 1
+        elif j == 0:
+            path.append((i-1, 0))
+            i -= 1
+        else:
+            if q[i-1][j] > q[i][j-1]:
+                path.append((i-1, j))
+                i -= 1
+            else:
+                path.append((i, j-1))
+                j -= 1
+
+    # Reverse the path to print from start to end
+    path.reverse()
+    for i, j in path:
+        print(f"({i}, {j}) -> ", end='')
+    print("(0, 0)")
+
+# Example usage
+
+
+
+# Given values for the p table
+p = [
+    [12, 10, 3, 4, 7],
+    [8, 2, 15, 10, 8],
+    [7, 6, 4,3, 12],  # corrected empty value to 0
+    [3, 20, 8, 9, 10],
+    [14, 16, 12, 11, 7]
+]
+q=maximum_profit_path(p)

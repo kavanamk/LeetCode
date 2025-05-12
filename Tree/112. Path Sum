@@ -1,0 +1,49 @@
+# Definition for a binary tree node.
+class TreeNode(object):
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+        
+class Solution(object):
+    
+    def isLeaf(self, root):
+        """Check if the node is a leaf node."""
+        return root.left is None and root.right is None
+    
+    def hasPathSum(self, root, targetSum):
+        """
+        :type root: TreeNode
+        :type targetSum: int
+        :rtype: bool
+        """
+        # Base case: If root is None, no path exists
+        if root is None:
+            return False
+        
+        # If we're at a leaf node, check if the path sum equals the targetSum
+        if self.isLeaf(root):
+            return root.val == targetSum
+        
+        # Subtract the current node's value from the target sum
+        targetSum -= root.val
+        
+        # Recursively check left and right subtrees
+        return self.hasPathSum(root.left, targetSum) or self.hasPathSum(root.right, targetSum)
+        
+        
+        
+
+targetSum=22
+root=TreeNode(5)
+root.left=TreeNode(4)
+root.right=TreeNode(8)
+root.left.left=TreeNode(11)
+root.right.left=TreeNode(13)
+root.right.right=TreeNode(4)
+root.left.left.left=TreeNode(2)
+root.left.left.right=TreeNode(7)
+root.right.right.right=TreeNode(1)
+obj=Solution()
+ans=obj.hasPathSum(root, targetSum)
+print(ans)

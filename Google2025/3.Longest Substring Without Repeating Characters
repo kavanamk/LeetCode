@@ -1,0 +1,28 @@
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        n=len(s)
+        if n==1 or n==0:
+            return n
+        maxlen=0
+        window=set()
+        i,j=0,0
+        while j<n:
+            
+            if s[j] not in window:
+                window.add(s[j])
+                j=j+1
+            else:
+                window=set()
+                i=i+1
+                j=i+1
+                window.add(s[i])
+            maxlen=max(maxlen,len(window))
+            #print(window)
+            
+        return maxlen
+
+#my own fucking code lol, beat this chatgpt 

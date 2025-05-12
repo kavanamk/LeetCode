@@ -1,0 +1,19 @@
+class Solution(object):
+    def sortSentence(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        split=s.split()
+        numfirst=[]
+        for x in split:
+            last=x[-1:]
+            x=last+x[:-1]
+            numfirst.append(x)
+
+        ans=''
+        for st in sorted(numfirst):
+            ans=ans+st[1:]+" "
+
+        return ans[:-1]
+        

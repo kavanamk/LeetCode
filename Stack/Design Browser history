@@ -1,0 +1,45 @@
+class BrowserHistory(object):
+
+    stack=[]
+    forward_stack=[]
+
+    def __init__(self, homepage):
+        """
+        :type homepage: str
+        """
+        self.homepage=homepage
+
+    def visit(self, url):
+        """
+        :type url: str
+        :rtype: None
+        """
+        stack.append(url)
+        
+
+    def back(self, steps):
+        """
+        :type steps: int
+        :rtype: str
+        """
+        for i in range(1,steps+1):
+            forward_stack.append(stack.pop())
+        top=len(stack)
+        return stack[top]
+        
+
+    def forward(self, steps):
+        """
+        :type steps: int
+        :rtype: str
+        """
+        return forward_stack[steps-1]
+
+        
+
+
+# Your BrowserHistory object will be instantiated and called as such:
+# obj = BrowserHistory(homepage)
+# obj.visit(url)
+# param_2 = obj.back(steps)
+# param_3 = obj.forward(steps)

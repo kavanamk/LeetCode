@@ -1,0 +1,22 @@
+class Solution(object):
+    def climbStairs(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        if n <= 1:
+            return 1
+        
+        # Create an array to store the number of ways to reach each step
+        dp = [0] * (n + 1)
+        
+        # There is 1 way to reach step 0 (do nothing) and 1 way to reach step 1
+        dp[0] = 1
+        dp[1] = 1
+        
+        # Loop to calculate the number of ways to reach each step
+        for i in range(2, n + 1):
+            dp[i] = dp[i - 1] + dp[i - 2]
+        
+        # The result is the number of ways to reach the nth step
+        return dp[n]

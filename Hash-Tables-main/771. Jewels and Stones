@@ -1,0 +1,18 @@
+class Solution(object):
+    def numJewelsInStones(self, jewels, stones):
+        """
+        :type jewels: str
+        :type stones: str
+        :rtype: int
+        """
+        dict={}
+        for stone in stones:
+            if stone in dict:
+                dict[stone]+=1
+            else:
+                dict[stone]=1
+        numJewels=0
+        for jewel in jewels:
+            if jewel in dict:
+                numJewels+=dict[jewel]
+        return numJewels
