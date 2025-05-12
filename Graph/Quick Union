@@ -1,0 +1,23 @@
+#Quick Find
+def root(i):
+    while i!=id[i]:
+        i=id[i]
+    return i
+        
+def union(p,q):
+    proot=root(p)
+    qroot=root(q)
+    id[proot]=id[qroot]
+    
+def find(p,q):
+    return root(p)==root(q)
+    
+    
+
+id=[]
+for i in range(10):
+    id.append(i)
+print(id)
+union(4,3)
+print(id)
+print(find(4,3))

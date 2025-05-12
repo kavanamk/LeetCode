@@ -1,0 +1,47 @@
+beginWord = "hit"
+endWord = "cog"
+wordList = ["hot","dot","dog","lot","log"]
+output=[]
+
+def diffstring(str1,str2):
+    n=0
+    for s in str1:
+        if s not in str2:
+            n+=1
+    if n==1:
+        return True
+    else:
+        return False
+
+dict={}
+dict[beginWord]=[]
+for word in wordList:
+    dict[word]=[]
+    
+
+    
+for key,values in dict.items():
+    for word in wordList:
+        if diffstring(key,word):
+            dict[key].append(word)
+        
+#print(dict)
+
+#bfs
+visited=[]
+queue=[]
+def bfs(visited,graph,node):
+    output=[]
+    visited.append(node)
+    queue.append(node)
+    
+    while queue:
+        s=queue.pop(0)
+        output.append(s)
+        for neighbour in graph[s]:
+            if neighbour not in visited:
+                visited.append(neighbour)
+                queue.append(neighbour)
+    return output
+
+print(bfs(visited,dict,beginWord))

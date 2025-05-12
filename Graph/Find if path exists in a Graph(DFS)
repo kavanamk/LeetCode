@@ -1,0 +1,38 @@
+def validPath(n, edges, source, destination):
+    # Create an adjacency list to represent the graph
+    graph = {}
+    for u, v in edges:
+        if u in graph:
+            graph[u].append(v)
+        else:
+            graph[u] = [v]
+        if v in graph:
+            graph[v].append(u)
+        else:
+            graph[v] = [u]
+    
+    # Create a set to keep track of visited nodes during DFS
+    visited = set()
+    
+    # Define a DFS function to check for a valid path
+    def dfs(node):
+        if node == destination:
+            return True
+        visited.add(node)
+        if node in graph:
+            for neighbor in graph[node]:
+                if neighbor not in visited:
+                    if dfs(neighbor):
+                        return True
+        return False
+    
+    # Start DFS from the source node
+    return dfs(source)
+
+# Test case
+n = 3
+edges = [[0, 1], [1, 2], [2, 0]]
+source = 0
+destination = 2
+result = validPath(n, edges, source, destination)
+print(result)

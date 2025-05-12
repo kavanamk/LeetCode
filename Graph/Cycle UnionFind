@@ -1,0 +1,37 @@
+from collections import defaultdict
+
+class Graph:
+    def __init__(self,vertices):
+        self.V=vertices
+        self.graph=defaultdict(list)
+    
+    def addEdge(self,u,v):
+        self.graph[u].append(v)
+    
+    def find(self,parent,i):
+        if parent[i]==i:
+            return i
+        else:
+            return self.find(parent,parent[i])
+    
+    def union(self,parent, x,y):
+        parent[x]=y
+        
+    def isCyclic(self):
+        parent=[k for k in range(self.V)]
+        #print(parent)
+        for i in self.graph:
+            for j in self.graph[i]:
+                x=self.find(parent,i)
+                y=self.find(parent, j)
+                if x==y:
+                    return True
+                self.union(parent,x,y)
+        
+
+g=Graph(3)
+g.addEdge(0, 1)
+g.addEdge(1, 2)
+g.addEdge(2, 0)
+print(g.graph)
+print(g.isCyclic())

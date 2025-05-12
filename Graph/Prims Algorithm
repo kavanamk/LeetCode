@@ -1,0 +1,57 @@
+from collections import defaultdict
+import heapq
+
+def adjList(edges):
+    graph=defaultdict(list)
+    for u,v,w in edges:
+        graph[u].append([w,v])
+        graph[v].append([w,u])
+    return graph
+
+#create Min Heap
+def PriorityQueue(graph):
+    for key,val in graph.items():
+        heapq.heapify(val)
+    return graph
+
+def Prims(graph,numOfVertices):
+    mst=[]
+    visited=[]
+    queue=[0]
+    graph=PriorityQueue(graph)
+    #print(graph)
+    visited.append(queue[0])
+    
+    while len(visited)!=numOfVertices:
+        if queue:
+            u=queue.pop(0)
+        else:
+            for key,val in graph.items():
+                if key not in visited:
+                    u=key
+                    visited.append(u)
+                    mst.append([u,val[0][1],val[0][0]])
+                    break
+        print(u)
+        for w,v in graph[u]:
+            if v not in visited:
+                visited.append(v)
+                queue.append(v)
+                mst.append([u,v,w])
+                break
+                
+    
+    return mst
+    
+
+edges=[[0, 2,0.1],
+       [0, 1,0.3],
+       [1, 3,0.7],
+       [2,3,0.4],
+       [3,4,0.02],
+        [2,4,0.8]]
+       
+graph=adjList(edges)
+
+#print(PriorityQueue(graph))
+print(Prims(graph,5))

@@ -1,0 +1,25 @@
+class Solution(object):
+    def findCenter(self, edges):
+    # Create an empty dictionary to represent the graph
+        graph = {}
+        
+        # Populate the graph with neighbors
+        for edge in edges:
+            u, v = edge
+            if u in graph:
+                graph[u].append(v)
+            else:
+                graph[u] = [v]
+            if v in graph:
+                graph[v].append(u)
+            else:
+                graph[v] = [u]
+        
+        # Find the node with a degree of n - 1
+        n = len(edges) + 1  # Total number of nodes
+        for node, neighbors in graph.items():
+            if len(neighbors) == n - 1:
+                return node
+
+
+        

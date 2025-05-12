@@ -1,0 +1,15 @@
+#Quick Find
+def union(p,q):
+    id[p]=q
+    
+def find(p,q):
+    return id[p]==id[q]
+    
+
+id=[]
+for i in range(10):
+    id.append(i)
+print(id)
+union(4,3)
+print(id)
+print(find(4,1))

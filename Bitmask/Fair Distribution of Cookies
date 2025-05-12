@@ -1,0 +1,24 @@
+class Solution(object):
+    def distributeCookies(self, cookies, k):
+        total=sum(cookies)
+        fair=(total/k)+0.5
+        
+        recieves=[]
+        for i in range(0,k):
+            recieves.append([])
+        
+        for bag in cookies:
+            for r in recieves:
+                if sum(r)+bag<=fair:
+                    r.append(bag)
+                    break
+       
+        
+        return max(recieves)
+            
+        
+
+obj=Solution()
+cookies = [8,15,10,20,8]
+k = 2
+print(obj.distributeCookies(cookies, k))

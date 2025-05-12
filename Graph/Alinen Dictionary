@@ -1,0 +1,45 @@
+words=["wrt","wrf","er","ett","rftt"]
+
+class ListNode(object):
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def firstDiffChar(w1,w2):
+    i,j=0,0
+    while True:
+        if w1[i]==w2[j]:
+            i+=1
+            j+=1
+        else:
+            return w1[i],w2[j]
+
+graph=dict()
+for word in words:
+    for letter in word:
+        if letter not in graph:
+            graph[letter]=[]
+            
+    
+for i in range(len(words)-1):
+    print(firstDiffChar(words[i], words[i+1]))
+    x,y=firstDiffChar(words[i], words[i+1])
+    graph[x]=y
+    
+
+print(graph)
+stack=[]
+visited=set()
+
+def topologicalSort(graph,node,stack,visited):
+    
+    if node not in visited:
+        visited.add(node)
+        #print(visited)
+        for neighbour in graph[node]:
+            topologicalSort(graph, neighbour, stack, visited)
+        stack.append(node)
+            
+    return stack
+
+print(topologicalSort(graph,'w',stack,visited))

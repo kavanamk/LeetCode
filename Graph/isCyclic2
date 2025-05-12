@@ -1,0 +1,46 @@
+from collections import defaultdict
+
+class Graph:
+    def __init__(self,vertices):
+        self.V=vertices
+        self.graph=defaultdict(list)
+    
+    def addEdge(self,u,v):
+        self.graph[u].append(v)
+    
+    def root(self,i,id):
+        while i!=id[i]:
+            i=id[i]
+        return i
+        
+    def union(self,p,q,id):
+        proot=self.root(p,id)
+        qroot=self.root(q,id)
+        id[proot]=id[qroot]
+        
+    def find(self,p,q,id):
+        return self.root(p,id)==self.root(q,id)
+    
+    def isCyclic(self):
+        id=[]
+        for i in range(10):
+            id.append(i)
+        #print(id)
+        for u in self.graph:
+            for v in self.graph[u]:
+                if self.find(u,v,id):
+                    return True
+                self.union(u,v,id)
+            
+                
+
+                
+
+#assume edges are in sorted order of weight
+g = Graph(3)
+g.addEdge(0, 1)
+g.addEdge(1, 2)
+g.addEdge(2, 0)
+print(g.isCyclic())
+      
+#print(g.isCyclic())

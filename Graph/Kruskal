@@ -1,0 +1,43 @@
+
+def root(i,id):
+    while i!=id[i]:
+        i=id[i]
+    return i
+        
+def union(p,q,id):
+    proot=root(p,id)
+    qroot=root(q,id)
+    id[proot]=id[qroot]
+    
+def find(p,q,id):
+    return root(p,id)==root(q,id)
+    
+         
+
+def Kruskal(edges,vertexNum):
+    mst=[]
+    id=[]
+    for i in range(0,vertexNum):
+        id.append(i)
+    
+    for u,v,w in edges:
+        if find(u,v,id):
+            continue #diff between pass and continue?
+        else:
+            mst.append([u,v,w])
+            union(u,v,id)
+    return mst
+                
+
+#assume edges are in sorted order of weight
+
+edges=[[0, 1,0.3],[1, 2,0.4],[2, 3,0.5]]
+
+print("Kruskal's output without cycle")
+print(Kruskal(edges,4))
+        
+#purpousefully adding a cycle
+edges=[[0, 1,0.1],[1, 2,0.2],[2, 0,0.3]]
+
+print("Kruskal's output with cycle")
+print(Kruskal(edges,3))
