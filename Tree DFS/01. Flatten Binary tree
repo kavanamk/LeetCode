@@ -1,0 +1,50 @@
+# Definition for a binary tree node
+class TreeNode:
+    def __init__(self, data):
+         self.data = data
+         self.left = None
+         self.right = None
+
+class LinkedList:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+def flatten_tree(root):
+    dummy = LinkedList(0)         # dummy head
+    tail = preorder(root, dummy)  # pass dummy to build list
+    return dummy.next             # skip dummy and return real head
+
+def preorder(root, head):
+    if root is None:
+        return head
+
+    # Create a new node with root's data and link it
+    head.next = LinkedList(root.data)
+    head = head.next              # move head to the new tail
+
+    # Recur for left and right
+    head = preorder(root.left, head)
+    head = preorder(root.right, head)
+    
+    return head                   # return updated tail
+
+# Build sample tree
+#       1
+#      / \
+#     2   3
+#    / \
+#   4   5
+
+root = TreeNode(1)
+root.left = TreeNode(2)
+root.right = TreeNode(3)
+root.left.left = TreeNode(4)
+root.left.right = TreeNode(5)
+
+# Flatten and print linked list
+ll_head = flatten_tree(root)
+curr = ll_head
+while curr:
+    print(curr.data, end=" -> ")
+    curr = curr.next
