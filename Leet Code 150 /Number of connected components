@@ -1,0 +1,27 @@
+class UnionFind:
+    def __init__(self,size):
+        self.parent=[i for i in range(size)]
+        self.count = size
+    
+    def find(self,x):
+        if self.parent[x]==x:
+            return x
+        else:
+            return self.find(self.parent[x])
+    
+    def union(self,x,y):
+        rootX=self.find(x)
+        rootY=self.find(y)
+        if rootX==rootY:
+            return False
+        self.parent[rootX]=rootY
+        self.count-=1
+        return True
+    
+def numberofConnectedComponents(n,edges):
+    uf = UnionFind(n)
+    for x,y in edges:
+        uf.union(x, y)
+    return uf.count
+
+print(numberofConnectedComponents( n, edges))
