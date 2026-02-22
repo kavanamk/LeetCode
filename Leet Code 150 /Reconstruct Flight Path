@@ -1,0 +1,30 @@
+class Solution:
+    
+
+    def constructAdjList(self,edges):
+        graph={}
+        for u,v in edges:
+            if u not in graph:
+                graph[u]=[v]
+            else:
+                graph[u].append(v)
+            if v not in graph:
+                graph[v]=[]
+        # Sort neighbors lexicographically to satisfy the requirement
+        for u in graph:
+            graph[u].sort()
+        return graph
+    
+    def findItinerary(self, tickets: List[List[str]]) -> List[str]:
+        graph=self.constructAdjList(tickets)
+        itineary=[]
+        
+        def dfs(start):
+            # Use Hierholzer's algorithm to find Eulerian path
+            while graph[start]:
+                neighbor = graph[start].pop(0)
+                dfs(neighbor)
+            itineary.append(start)
+        
+        dfs("JFK")
+        return itineary[::-1]
